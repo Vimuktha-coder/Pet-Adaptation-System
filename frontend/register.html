@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>PawsConnect - Register</title>
+    <link rel='stylesheet' href='css/style.css'>
+</head>
+<body>
+    
+    
+<nav class="navbar">
+    <a href="index.html" class="logo"><span class="logo-icon">❤️</span> PawsConnect</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="pets.html">Pets</a>
+        <a href="chat.html">PawPal Chat</a>
+        <a href="volunteer.html">Volunteer</a>
+        <a href="donate.html">Donate</a>
+    </div>
+    <div class="nav-auth">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="form-wrapper">
+            <h1>Create an Account</h1>
+            <p style="color: var(--text-muted); margin-bottom: 25px;">Join the PawsConnect community</p>
+
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('user')">Adopter/Volunteer</div>
+                <div class="tab" onclick="switchTab('shelter')">Animal Shelter</div>
+            </div>
+
+            <!-- User Registration Form -->
+            <form id='register-user-form' class="tab-content active">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type='text' id='reg-user-name' placeholder='Name' required/>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type='email' id='reg-user-email' placeholder='Email' required/>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type='password' id='reg-user-password' placeholder='Password' required/>
+                </div>
+                <button type="submit" class="btn btn-primary full-width" style="margin-top: 10px;">Create Account</button>
+            </form>
+
+            <!-- Shelter Registration Form -->
+            <form id='register-shelter-form' class="tab-content">
+                <div class="form-group">
+                    <label>Shelter Name</label>
+                    <input type='text' id='reg-shelter-name' placeholder='Shelter Name' required/>
+                </div>
+                <div class="form-group">
+                    <label>Contact Email</label>
+                    <input type='email' id='reg-shelter-email' placeholder='Email' required/>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type='tel' id='reg-shelter-phone' placeholder='Phone Number' required/>
+                </div>
+                <!-- OTP Group Removed -->
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type='text' id='reg-shelter-address' placeholder='Full Address' required/>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id='reg-shelter-desc' placeholder='Brief description of your shelter' rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type='password' id='reg-shelter-password' placeholder='Password' required/>
+                </div>
+                <button type="submit" class="btn btn-primary full-width" style="margin-top: 10px;">Create Account</button>
+            </form>
+
+            <script>
+                function switchTab(tabId) {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    if (tabId === 'user') {
+                        document.querySelectorAll('.tab')[0].classList.add('active');
+                        document.getElementById('register-user-form').classList.add('active');
+                    } else {
+                        document.querySelectorAll('.tab')[1].classList.add('active');
+                        document.getElementById('register-shelter-form').classList.add('active');
+                    }
+                }
+            </script>
+        </div>
+    </div>
+    
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <div class="logo"><span class="logo-icon">❤️</span> PawsConnect</div>
+            <p style="margin-top: 15px;">Connecting loving homes with animals in need. Every pet deserves a family.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="pets.html">Browse Pets</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="footer-col">
+            <h4>For Shelters</h4>
+            <a href="register.html">Register Shelter</a>
+            <a href="login.html">Shelter Login</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <p>support@pawsconnect.com</p>
+            <p>+91 98765 43210</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 PawsConnect. All rights reserved.
+    </div>
+</footer>
+
+    
+    <script src='js/main.js?v=999'></script>
+</body>
+</html>

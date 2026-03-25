@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Chat Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body, html { margin: 0; padding: 0; background: #f4f6f9; }
+        
+        .chat-container {
+            display: flex;
+            height: 100vh; /* Fill full height */
+            background: #f7f9fc;
+        }
+
+        /* Sidebar Styling */
+        .chat-sidebar {
+            width: 300px;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+        }
+
+        .chat-sidebar-header {
+            padding: 1.5rem;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .chat-contact {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .chat-contact:hover { background: #f8f6f4; }
+        .chat-contact.active {
+            background: #fff3e6;
+            border-left: 4px solid #e58225;
+        }
+        .chat-contact h4 { margin: 0; color: #333; font-size: 1rem; }
+
+        /* Main Chat Panel */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            background: #e58225;
+            color: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-text { flex: 1; }
+        .chat-header h3 { margin: 0; font-size: 1.4rem; }
+        .chat-header p { margin: 5px 0 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        .chat-header .back-btn {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .chat-header .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f9fbfd;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .msg {
+            max-width: 70%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .msg.sent {
+            background: #e58225;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg.received {
+            background: white;
+            border: 1px solid #e0e6ed;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .chat-input {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #e0e6ed;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input button {
+            background: #e58225;
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Simple Notification Toast */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="chat-sidebar">
+            <div id="sidebar-header" class="chat-sidebar-header">Contacts</div>
+            <div id="contact-list">
+                <div style="padding: 1rem; color: #888; text-align: center;">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <div class="chat-header-text">
+                    <h3 id="chat-title"><i class="fas fa-robot"></i> AI Assistant</h3>
+                    <p id="chat-subtitle">Automated responses enabled</p>
+                </div>
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Site</a>
+            </div>
+
+            <div class="chat-messages" id="messages-container"></div>
+
+            <form class="chat-input" id="chat-form">
+                <input type="text" id="msg-input" placeholder="Type your message here..." autocomplete="off" required>
+                <button type="submit">Send <i class="fas fa-paper-plane" style="margin-left: 5px;"></i></button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="toast"></div>
+
+    <script>
+        const API_BASE_URL = "http://localhost:8000";
+
+        // MOCK SESSION VARIABLES - IN REALITY FETCH THESE FROM LOCALSTORAGE / LOGIN
+        const urlParams = new URLSearchParams(window.location.search);
+        const roleOverride = urlParams.get('role');
+        
+        const currentUserRole = roleOverride || 'user'; // Change via ?role=shelter_admin
+        const currentUserId = 'user_123';
+        
+        // Pointers for Chat Window
+        let targetShelterId = (currentUserRole === 'shelter_admin') ? currentUserId : 'shelter1'; 
+        let targetUserId = (currentUserRole === 'user') ? currentUserId : ''; 
+        let lastMessageCount = 0; // State flag to track new AI messages
+
+        // Helper: Show notification Toast
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 3000);
+        }
+
+        // 1. Fetch Contacts for Sidebar
+        async function loadContacts() {
+            try {
+                // Determine layout based on role
+                const endpoint = currentUserRole === 'shelter_admin' ? '/api/shelter-conversations' : '/api/public-shelters';
+                document.getElementById('sidebar-header').innerText = currentUserRole === 'shelter_admin' ? "Recent Users" : "Shelters";
+
+                const response = await fetch(API_BASE_URL + endpoint);
+                const contacts = await response.json();
+                
+                const list = document.getElementById('contact-list');
+                list.innerHTML = '';
+                
+                // Select first contact automatically if none is selected
+                if (currentUserRole === 'shelter_admin' && !targetUserId && contacts.length > 0) targetUserId = contacts[0].id;
+
+                contacts.forEach(c => {
+                    const el = document.createElement('div');
+                    
+                    // Logic to see if contact should be shaded
+                    const isActive = currentUserRole === 'shelter_admin' ? (targetUserId === c.id) : (targetShelterId === c.id);
+                    el.className = `chat-contact ${isActive ? 'active' : ''}`;
+                    
+                    const displayName = c.shelter_name || c.full_name || c.name || ('User ' + c.id);
+                    el.innerHTML = `<h4>${displayName}</h4>`;
+                    
+                    // The shift/change action!
+                    el.onclick = () => {
+                        let didChange = false;
+                        if (currentUserRole === 'shelter_admin' && targetUserId !== c.id) {
+                            targetUserId = c.id; didChange = true;
+                        } else if (currentUserRole === 'user' && targetShelterId !== c.id) {
+                            targetShelterId = c.id; didChange = true;
+                        }
+
+                        if (didChange) {
+                            lastMessageCount = 0; // reset memory on switch
+                            showToast(`Switched chat to ${displayName}`);
+                            loadMessages(); 
+                        }
+
+                        // Update visual UI directly
+                        document.querySelectorAll('.chat-contact').forEach(node => node.classList.remove('active'));
+                        el.classList.add('active');
+                    };
+                    list.appendChild(el);
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        // 2. Fetch Messages from Backend
+        async function loadMessages() {
+            if (!targetUserId || !targetShelterId) return;
+
+            // Setup Header UI overrides based on role logic
+            if (currentUserRole === 'shelter_admin') {
+                document.getElementById('chat-title').innerText = 'Chat with User';
+                document.getElementById('chat-subtitle').innerText = 'PawPal Messaging (Shelter Admin View)';
+            } else {
+                document.getElementById('chat-title').innerText = 'Shelter AI Assistant';
+                document.getElementById('chat-subtitle').innerText = 'Automated responses enabled';
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/messages/${targetUserId}/${targetShelterId}`);
+                const messages = await response.json();
+                
+                // NOTIFICATION LOGIC: Check if new messages arrived
+                if (messages.length > lastMessageCount && lastMessageCount > 0) {
+                    const newMsg = messages[messages.length - 1];
+                    // Alert if the message sender is different than our layout type 
+                    // (User role checks for non-user, Shelter role checks for non-shelter messages)
+                    const accountTypeForCheck = currentUserRole === 'shelter_admin' ? 'shelter' : 'user';
+                    if (newMsg.sender_type !== accountTypeForCheck) {
+                        showToast('New message received!');
+                    }
+                }
+                lastMessageCount = messages.length;
+
+                renderMessages(messages);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // 3. Draw Messages on Screen
+        function renderMessages(messages) {
+            const container = document.getElementById('messages-container');
+            container.innerHTML = '';
+            
+            const currentAccountType = currentUserRole === 'shelter_admin' ? 'shelter' : 'user';
+
+            if (messages.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #888; margin-top: 2rem;">Say hello to start the conversation!</div>';
+                return;
+            }
+
+            messages.forEach(msg => {
+                const div = document.createElement('div');
+                const isSent = msg.sender_type === currentAccountType;
+                div.className = `msg ${isSent ? 'sent' : 'received'}`;
+                
+                // Format time nicely
+                const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                div.innerHTML = `
+                    <div>${msg.content}</div>
+                    <div style="font-size: 0.7rem; opacity: 0.7; text-align: right; margin-top: 5px;">${time}</div>
+                `;
+                container.appendChild(div);
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // 4. Send Message Event Listener
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('msg-input');
+            const content = input.value;
+            if (!content.trim()) return;
+            input.value = '';
+
+            try {
+                await fetch(API_BASE_URL + '/api/send-message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: targetUserId,
+                        shelter_id: targetShelterId,
+                        content: content,
+                        sender_type: currentUserRole === 'shelter_admin' ? 'shelter' : 'user'
+                    })
+                });
+                
+                setTimeout(loadMessages, 300); // Reload instantly
+            } catch (err) {
+                console.error("Sending failed", err);
+            }
+        });
+
+        // Init App On Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContacts();
+            loadMessages();
+            setInterval(loadMessages, 3000); // Poll for replies
+        });
+    </script>
+</body>
+</html>

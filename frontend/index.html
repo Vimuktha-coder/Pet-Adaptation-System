@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>PawsConnect - Index</title>
+    <link rel='stylesheet' href='css/style.css?v=1000'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-icon">❤️</span> PawsConnect</a>
+        <div class="nav-links">
+            <a href="index.html" style="color: var(--primary);">Home</a>
+            <a href="pets.html">Pets</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="nav-auth">
+            <a href="login.html" class="btn btn-secondary"
+                style="background:transparent; border-color:#e5e7eb;">Login</a>
+            <a href="register.html" class="btn btn-primary" style="background:#ea580c;">Register</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Every Pet Deserves a<br><span>Loving Home</span></h1>
+            <p>Connect with shelters, adopt your new best friend, volunteer your time, or donate to make a difference in
+                animal lives.</p>
+            <div class="hero-buttons">
+                <a href="pets.html" class="btn btn-primary">🐾 Adopt a Pet</a>
+                <a href="volunteer.html" class="btn btn-primary">Volunteer</a>
+                <a href="donate.html" class="btn btn-primary">Donate</a>
+            </div>
+        </div>
+    </div>
+
+    <section id="user-dashboard-section" class="section"
+        style="display:none; background: #fff0eb; border-bottom: 1px solid var(--border);">
+        <div style="margin-bottom: 20px;"><i class="fas fa-home" style="font-size: 2rem; color: var(--primary);"></i>
+        </div>
+        <h2 class="section-title">My Dashboard</h2>
+        <p class="section-subtitle" style="margin-bottom: 30px;">Track your adoption and volunteer applications here.
+        </p>
+
+        <div class="container grid-container" style="padding-top: 0; align-items: stretch; max-width: 1100px;">
+            <div
+                style="background: white; border-radius: 12px; padding: 25px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); height: 100%;">
+                <h3
+                    style="margin-top: 0; color: #1f2937; border-bottom: 2px solid #f3f4f6; padding-bottom: 15px; margin-bottom: 20px;">
+                    <i class="fas fa-paw" style="color: var(--primary); margin-right: 8px;"></i> Adoption Applications
+                </h3>
+                <div id="user-adopt-list"></div>
+            </div>
+
+            <div
+                style="background: white; border-radius: 12px; padding: 25px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); height: 100%;">
+                <h3
+                    style="margin-top: 0; color: #1f2937; border-bottom: 2px solid #f3f4f6; padding-bottom: 15px; margin-bottom: 20px;">
+                    <i class="fas fa-hands-helping" style="color: var(--secondary); margin-right: 8px;"></i> Volunteer
+                    Applications</h3>
+                <div id="user-vol-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="margin-bottom: 20px;"><img src="https://cdn-icons-png.flaticon.com/512/2138/2138241.png" width="40"
+                style="opacity: 0.6"></div>
+        <h2 class="section-title">About PawsConnect</h2>
+        <p class="section-subtitle">PawsConnect is a platform connecting multiple animal shelters with loving families.
+            We facilitate adoptions, coordinate volunteers, and channel donations to support shelters across the
+            country.</p>
+    </section>
+
+    <div class="banner"></div>
+
+    <section class="section">
+        <h2 class="section-title">Featured Pets</h2>
+        <p class="section-subtitle">These adorable animals are looking for their forever homes</p>
+
+        <div class="container grid-container" id="featured-pets-list" style="padding-top: 0;">
+            <p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center;">Loading featured pets...</p>
+        </div>
+
+        <a href="pets.html" class="btn btn-secondary" style="margin-top: 20px;">View All Pets</a>
+    </section>
+
+    <section class="section" style="background: var(--white);">
+        <h2 class="section-title">Success Stories</h2>
+        <p class="section-subtitle">Happy endings made possible by our community</p>
+        <!-- Adding some fake success stories -->
+        <div class="container grid-container" style="padding-top: 0; max-width: 900px;">
+            <div
+                style="background: var(--bg-light); border-radius: 12px; padding: 30px; border: 1px solid var(--border); text-align:left;">
+                <p style="font-style: italic; color: var(--text-muted); margin-bottom: 20px;">"PawsConnect made finding
+                    our new family member so easy. The shelter was incredibly supportive!"</p>
+                <h4 style="font-family: 'Inter', sans-serif;">The Smith Family</h4>
+            </div>
+
+            <div
+                style="background: var(--bg-light); border-radius: 12px; padding: 30px; border: 1px solid var(--border); text-align:left;">
+                <p style="font-style: italic; color: var(--text-muted); margin-bottom: 20px;">"Volunteering through the
+                    platform has been the most rewarding experience of my life."</p>
+                <h4 style="font-family: 'Inter', sans-serif;">Sarah J.</h4>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo"><span class="logo-icon">❤️</span> PawsConnect</div>
+                <p style="margin-top: 15px;">Connecting loving homes with animals in need. Every pet deserves a family.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="pets.html">Browse Pets</a>
+                <a href="volunteer.html">Volunteer</a>
+                <a href="donate.html">Donate</a>
+            </div>
+            <div class="footer-col">
+                <h4>For Shelters</h4>
+                <a href="register.html">Register Shelter</a>
+                <a href="login.html">Shelter Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>support@pawsconnect.com</p>
+                <p>+91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 PawsConnect. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Chat Widget Float Button -->
+    <button id="chat-widget-btn" class="chat-widget-btn">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Chat Widget Container -->
+    <div id="chat-widget-container" class="chat-container widget-hidden">
+
+
+        <!-- Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <div>
+                    <h3 id="chat-title"><i class="fas fa-robot"></i> AI Assistant</h3>
+                    <p id="chat-subtitle">Automated responses enabled</p>
+                </div>
+                <button id="chat-close-btn" class="chat-close-btn" type="button"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="chat-messages" id="messages-container"></div>
+
+            <form class="chat-input" id="chat-form">
+                <input type="text" id="msg-input" placeholder="Type your message..." autocomplete="off" required>
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src='js/main.js?v=1000'></script>
+</body>
+
+</html>

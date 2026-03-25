@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>PawsConnect - Adoption</title>
+    <link rel='stylesheet' href='css/style.css'>
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-icon">❤️</span> PawsConnect</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="pets.html">Pets</a>
+            <a href="chat.html">PawPal Chat</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="nav-auth">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-wrapper">
+            <h1>Adoption Application</h1>
+            <p class="section-subtitle" style="margin-bottom: 30px;">Tell us about yourself to adopt Bella.</p>
+            <form id="adopt-page-form">
+                <input type="hidden" id="adopt-page-pet-id" value="">
+                <div class="form-group"><label>Full Name</label><input type="text" id="adopt-page-name" required
+                        placeholder="John Doe"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="adopt-page-email" required
+                        placeholder="john@example.com"></div>
+
+                <div class="form-group"><label>House Type</label>
+                    <select id="adopt-page-house">
+                        <option value="House with Yard">House with Yard</option>
+                        <option value="House without Yard">House without Yard</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Experience with Pets</label><textarea id="adopt-page-experience" rows="3"
+                        placeholder="Tell us about your previous experience with pets"></textarea></div>
+                <div class="form-group"><label>Why do you want to adopt this pet?</label><textarea
+                        id="adopt-page-reason" rows="3" required
+                        placeholder="Tell us why you would be a good fit..."></textarea></div>
+
+                <button type="submit" class="btn btn-primary full-width" style="margin-top: 10px;">Submit
+                    Application</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo"><span class="logo-icon">❤️</span> PawsConnect</div>
+                <p style="margin-top: 15px;">Connecting loving homes with animals in need. Every pet deserves a family.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="pets.html">Browse Pets</a>
+                <a href="volunteer.html">Volunteer</a>
+                <a href="donate.html">Donate</a>
+            </div>
+            <div class="footer-col">
+                <h4>For Shelters</h4>
+                <a href="register.html">Register Shelter</a>
+                <a href="login.html">Shelter Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>support@pawsconnect.com</p>
+                <p>+91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 PawsConnect. All rights reserved.
+        </div>
+    </footer>
+
+
+    <script src='js/main.js?v=999'></script>
+</body>
+
+</html>

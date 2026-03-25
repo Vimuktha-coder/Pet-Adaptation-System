@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Volunteer - PawsConnect</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body style="background: #f5f5f4;">
+
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-icon">❤️</span> PawsConnect</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="pets.html">Pets</a>
+            <a href="volunteer.html" style="color: var(--primary);">Volunteer</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="nav-auth">
+            <a href="login.html" class="btn btn-secondary"
+                style="background:transparent; border-color:#e5e7eb;">Login</a>
+            <a href="register.html" class="btn btn-primary" style="background:#ea580c;">Register</a>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 40px; text-align: center;">
+        <div
+            style="background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto; padding: 50px 40px; text-align: left;">
+            <h1
+                style="font-size: 2.2rem; font-family: 'Playfair Display', serif; margin-bottom: 10px; color: #111827; text-align: center;">
+                Volunteer Application</h1>
+            <p style="color: #6b7280; font-size: 1rem; margin-bottom: 30px; text-align: center;">Offer your time and
+                help shelters directly.</p>
+
+            <form id='volunteer-form'>
+                <div class="lovable-form-group">
+                    <label style="color: #374151; font-weight: 500; font-size: 0.9rem;">Full Name</label>
+                    <input type='text' id='vol-name' placeholder="John Doe" required
+                        style="border-radius: 8px; border: 1px solid #e5e7eb; padding: 12px; width: 100%; font-size: 1rem; color: #4b5563; outline: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'" />
+                </div>
+
+                <div class="lovable-form-group" style="margin-top: 20px;">
+                    <label style="color: #374151; font-weight: 500; font-size: 0.9rem;">Email</label>
+                    <input type='email' id='vol-email' placeholder="john@example.com" required
+                        style="border-radius: 8px; border: 1px solid #e5e7eb; padding: 12px; width: 100%; font-size: 1rem; color: #4b5563; outline: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'" />
+                </div>
+
+                <div class="lovable-form-group" style="margin-top: 20px;">
+                    <label style="color: #374151; font-weight: 500; font-size: 0.9rem;">Select Shelter</label>
+                    <select id='vol-shelter' required
+                        style="background: white; border-radius: 8px; border: 1px solid #e5e7eb; padding: 12px; width: 100%; font-size: 1rem; color: #4b5563; outline: none; transition: border-color 0.2s; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px auto;"
+                        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+                        <option value="">Loading shelters...</option>
+                    </select>
+                </div>
+
+                <div class="lovable-form-group" style="margin-top: 20px;">
+                    <label style="color: #374151; font-weight: 500; font-size: 0.9rem;">Skills & Motivation</label>
+                    <textarea id='vol-message' placeholder="How can you help?" rows="4" required
+                        style="border-radius: 8px; border: 1px solid #e5e7eb; padding: 12px; width: 100%; font-size: 1rem; color: #4b5563; outline: none; transition: border-color 0.2s; resize: vertical; font-family: inherit;"
+                        onfocus="this.style.borderColor='var(--primary)'"
+                        onblur="this.style.borderColor='#e5e7eb'"></textarea>
+                </div>
+
+                <button type="submit"
+                    style="background: #ea580c; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: 500; font-size: 1rem; cursor: pointer; transition: background 0.2s; margin-top: 30px;"
+                    onmouseover="this.style.background='#c2410c'" onmouseout="this.style.background='#ea580c'">Apply
+                    Now</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo"><span class="logo-icon">❤️</span> PawsConnect</div>
+                <p style="margin-top: 15px;">Connecting loving homes with animals in need. Every pet deserves a family.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="pets.html">Browse Pets</a>
+                <a href="volunteer.html">Volunteer</a>
+                <a href="donate.html">Donate</a>
+            </div>
+            <div class="footer-col">
+                <h4>For Shelters</h4>
+                <a href="register.html">Register Shelter</a>
+                <a href="login.html">Shelter Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>support@pawsconnect.com</p>
+                <p>+91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 PawsConnect. All rights reserved.
+        </div>
+    </footer>
+
+    <script src='js/main.js?v=1000'></script>
+</body>
+
+</html>

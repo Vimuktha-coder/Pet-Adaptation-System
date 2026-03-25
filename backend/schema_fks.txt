@@ -1,0 +1,4 @@
+adoption_requests.pet_id -> Note:
+This is a Foreign Key to `pets.id`.<fk table='pets' column='id'/>
+pet_images.pet_id -> Note:
+This is a Foreign Key to `pets.id`.<fk table='pets' column='id'/>

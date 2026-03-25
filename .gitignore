@@ -1,0 +1,28 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs and databases
+*.sqlite3
+*.log
+
+# Caches and outputs
+pets_output.json
+dump_pets.json
+
+# Node
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
