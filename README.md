@@ -1,7 +1,6 @@
 # 🐾 Multi-Shelter Pet Adoption Platform 🐾
 
-Welcome to the **Multi-Shelter Pet Adoption Platform**! This is a comprehensive, full-stack application designed to connect prospective pet adopters with multiple animal shelters. It provides dedicated dashboards for different user roles (System Admins, Shelter Managers, Volunteers) and features a beautiful frontend for users to find their next furry friend.
-
+Welcome to the **Multi-Shelter Pet Adoption Platform**! This is a comprehensive, full-stack application designed to connect prospective pet adopters with multiple animal shelters. It provides dedicated dashboards for different user roles (System Admins, Shelter Managers, Volunteers) and features a beautiful frontend for users to find their next cute furry friend.
 ---
 
 ## ✨ Key Features
